@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Teatro Man Hairroom · Subotica</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#c9a84c;
+  --gold2:#e8c97a;
+  --gold3:#f5e4b0;
+  --black:#0a0a0a;
+  --black2:#141414;
+  --black3:#1e1e1e;
+  --white:#f8f4ee;
+  --muted:#8a8070;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Inter',sans-serif;
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  padding:40px 24px 80px;
+  overflow:hidden;
+}
+
+/* ambient bg glow */
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse 70% 60% at 50% 45%, rgba(201,168,76,.07) 0%, transparent 70%);
+  pointer-events:none;
+}
+
+/* rotating rings */
+.rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.ring{
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(201,168,76,.12);
+}
+.ring-1{width:320px;height:320px;animation:spin 50s linear infinite}
+.ring-2{width:480px;height:480px;border-color:rgba(201,168,76,.07);animation:spin 70s linear infinite reverse}
+.ring-3{width:640px;height:640px;border-color:rgba(201,168,76,.04);animation:spin 90s linear infinite}
+
+/* gold dot on each ring */
+.ring::before{
+  content:'';position:absolute;
+  width:5px;height:5px;background:var(--gold);
+  border-radius:50%;top:-2.5px;left:50%;
+  transform:translateX(-50%);
+  box-shadow:0 0 10px 2px rgba(201,168,76,.5);
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── LOGO ANIMATION ── */
+.logo-stage{
+  position:relative;z-index:2;
+  text-align:center;
+  margin-bottom:36px;
+}
+
+/* outer glow ring around logo */
+.logo-halo{
+  position:relative;
+  display:inline-block;
+  padding:32px 20px 24px;
+}
+.logo-halo::before{
+  content:'';
+  position:absolute;inset:0;
+  border:1px solid rgba(201,168,76,.2);
+  border-radius:4px;
+  animation:haloBreath 4s ease-in-out infinite;
+}
+.logo-halo::after{
+  content:'';
+  position:absolute;inset:-8px;
+  border:1px solid rgba(201,168,76,.08);
+  border-radius:6px;
+  animation:haloBreath 4s ease-in-out infinite .5s;
+}
+@keyframes haloBreath{
+  0%,100%{opacity:.4;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.015)}
+}
+
+/* the actual logo image */
+.logo-img{
+  display:block;
+  width:220px;
+  max-width:72vw;
+  height:auto;
+  border-radius:16px;
+  position:relative;z-index:1;
+  animation:logoReveal 1.6s cubic-bezier(.16,1,.3,1) both,
+             logoShimmer 5s ease-in-out 2s infinite;
+  filter:drop-shadow(0 0 24px rgba(201,168,76,.35));
+}
+@keyframes logoReveal{
+  0%{
+    opacity:0;
+    transform:scale(.8) translateY(16px);
+    filter:drop-shadow(0 0 0px rgba(201,168,76,0)) blur(8px);
+  }
+  60%{
+    opacity:1;
+    filter:drop-shadow(0 0 30px rgba(201,168,76,.6)) blur(0);
+  }
+  100%{
+    opacity:1;
+    transform:scale(1) translateY(0);
+    filter:drop-shadow(0 0 20px rgba(201,168,76,.3)) blur(0);
+  }
+}
+@keyframes logoShimmer{
+  0%,100%{filter:drop-shadow(0 0 20px rgba(201,168,76,.3))}
+  50%{filter:drop-shadow(0 0 40px rgba(201,168,76,.7))}
+}
+
+/* golden underline */
+.logo-line{
+  width:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:10px auto 0;
+  animation:lineExpand 1s ease .9s both;
+}
+@keyframes lineExpand{to{width:200px}}
+
+/* tagline under logo */
+.hero-tagline{
+  font-size:11px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:14px;
+  animation:fadeUp .8s ease 1.2s both;
+}
+
+/* CTAs */
+.cta-wrap{
+  display:flex;flex-direction:column;gap:12px;
+  width:100%;max-width:320px;
+  position:relative;z-index:2;
+  animation:fadeUp .8s ease 1.4s both;
+}
+.btn-book{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:16px 24px;
+  background:var(--gold);color:var(--black);
+  border-radius:100px;
+  font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;transition:all .2s;
+}
+.btn-book:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.25)}
+.btn-call{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 24px;
+  background:transparent;color:var(--white);
+  border-radius:100px;font-size:13px;font-weight:500;letter-spacing:.06em;
+  text-decoration:none;border:1px solid rgba(201,168,76,.3);transition:all .2s;
+}
+.btn-call:hover{border-color:var(--gold);color:var(--gold);box-shadow:0 0 20px rgba(201,168,76,.1)}
+
+/* scroll hint */
+.scroll-hint{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  animation:fadeUp 1s ease 2s both;
+}
+.scroll-hint span{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.scroll-bar{width:1px;height:36px;background:linear-gradient(180deg,var(--gold),transparent);animation:scrollAnim 1.8s ease-in-out infinite}
+@keyframes scrollAnim{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* SECTION */
+.section{padding:64px 24px;max-width:480px;margin:0 auto}
+.section-label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,7vw,36px);font-weight:700;
+  letter-spacing:-.02em;line-height:1.1;
+  color:var(--white);margin-bottom:28px;
+}
+.section-title em{font-style:italic;color:var(--gold)}
+
+/* PRICE LIST */
+.svc-grid{
+  border:1px solid rgba(201,168,76,.12);
+  border-radius:16px;overflow:hidden;
+}
+.svc-cat{
+  padding:10px 20px;
+  background:rgba(201,168,76,.07);
+  font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);
+  border-top:1px solid rgba(201,168,76,.1);
+}
+.svc-cat:first-child{border-top:none}
+.svc-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 20px;background:var(--black2);
+  border-top:1px solid rgba(255,255,255,.04);
+  transition:background .15s;
+}
+.svc-item:hover{background:var(--black3)}
+.svc-name{font-size:14px;font-weight:400;color:rgba(248,244,238,.85)}
+.svc-price{font-size:13px;font-weight:600;color:var(--gold);letter-spacing:.02em}
+
+/* DIVIDER */
+.gold-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.2),transparent);margin:0 24px}
+
+/* INFO CARDS */
+.info-card{
+  background:var(--black2);border:1px solid rgba(201,168,76,.1);
+  border-radius:14px;padding:22px 20px;margin-bottom:12px;
+}
+.info-label{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.info-value{font-size:15px;font-weight:500;color:var(--white);line-height:1.5}
+.info-value a{color:var(--gold);text-decoration:none}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* HOURS */
+.hours-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:11px 0;border-bottom:1px solid rgba(201,168,76,.07);font-size:14px;
+}
+.hours-row:last-child{border-bottom:none}
+.hours-day{color:var(--muted)}
+.hours-time{color:var(--white);font-weight:500}
+.hours-closed{color:rgba(201,168,76,.35);font-size:12px}
+
+/* SOCIAL */
+.social-wrap{display:flex;gap:12px;margin-top:16px}
+.social-btn{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px;border-radius:12px;
+  border:1px solid rgba(201,168,76,.18);background:transparent;
+  color:var(--white);font-size:13px;font-weight:500;
+  text-decoration:none;transition:all .2s;
+}
+.social-btn:hover{border-color:var(--gold);color:var(--gold)}
+.social-icon{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+/* FOOTER */
+.footer{text-align:center;padding:40px 24px 52px;border-top:1px solid rgba(201,168,76,.1)}
+.footer-logo{display:block;width:80px;height:80px;object-fit:cover;border-radius:12px;margin:0 auto 12px;opacity:.55;}
+.footer-note{font-size:11px;color:var(--muted);letter-spacing:.04em;line-height:1.8}
+.footer-powered{margin-top:16px;font-size:10px;letter-spacing:.08em;color:rgba(138,128,112,.4)}
+.footer-powered a{color:rgba(201,168,76,.35);text-decoration:none;transition:color .2s}
+.footer-powered a:hover{color:var(--gold)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="rings">
+    <div class="ring ring-1"></div>
+    <div class="ring ring-2"></div>
+    <div class="ring ring-3"></div>
+  </div>
+
+  <div class="logo-stage">
+    <div class="logo-halo">
+      <img class="logo-img" src="data:image/png;base64,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tZGd3AALi7GcLFaNgM2zGpqTpEVFGykqaV0zaJs0tZWPcTFI14ZvRthb7528G8MDiSqznrMbdvp77/ZPw535c5ul9vd0hbDc7xcK6Jjt5rKipfI1p5ZAcTgrHLLaWo7JXXYQX+8SWmi6txNQymdOd7ubut48fH1Kpp636erJapt51DLa2RkdQ5lA6fruJzkBw3ccPHn6l0bxXxtx/ZntMqNv1HqG30jaSgv10pKdpJbFBVyMYCeZDQcLxdL5e7rCyG6Xi4V0cbt5jKmpfIGnxAcTgrPOsehB73XlW74jePpF4Nl0QP8AneqPxK/6xU76b77e0/ZPbbjf3YG1Xi7WnrPsXdK6g63HWdmqHx7+M4zukZxk/KVVuOoL9cqfs1xvdyrYd4O6uoqnyNyORw4kZWVdaNGD3usqt3xO4fSKm616RAO7qyrPxSfrFPfSZ329p+xtPH/rW1n7BrPVVhiENpv9fSwjlE2UujHsacgfIvrrbpUctT1Z+Kz9YqTqDTYJ3dQ1ZHd/u3H0im3ZeNrRv+yIiY4Xl42ga0u0Bgr9TXKSEjBjZL1bXDwIbgHzWsLLuorCOV8qD+Yf/ax1WynjnLaad08YAw90e4Tw48MlTStaxtWNkWmZ5UURFdAiIgIiICIiAiIgIiICIiAiIg+tc5rg5ri1wOQQcEFXU9zuVRudfcKuXq3B7N+Zzt1w5EZPA+tWiKNokXDK6tZVuq2VdQ2ocSXSiQh5zzy7mvcVyuMVMKaK4VccABAjbM4NAPPhnHeflVoibQbiIikEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQf/9k=" alt="Teatro Man Hairroom">
+      <div class="logo-line"></div>
+    </div>
+    <div class="hero-tagline">Mesto gde muškarac dolazi po više od frizure</div>
+  </div>
+
+  <div class="cta-wrap">
+    <a href="https://zakazivanje.teatro.rs/" class="btn-book">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Zakaži termin
+    </a>
+    <a href="tel:+381611431702" class="btn-call">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 7.54 7.54l1.62-.62a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17.92z"/></svg>
+      061 / 143-17-02
+    </a>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-bar"></div>
+    <span>Više</span>
+  </div>
+
+</section>
+
+<!-- SERVICES -->
+<div class="gold-divider"></div>
+
+<section class="section reveal">
+  <div class="section-label">Šta radimo</div>
+  <h2 class="section-title">Usluge &<br><em>cenovnik</em></h2>
+  <div class="svc-grid">
+    <div class="svc-cat">Šišanje kose</div>
+    <div class="svc-item"><span class="svc-name">Kratka kosa</span><span class="svc-price">1.300 din</span></div>
+    <div class="svc-item"><span class="svc-name">Srednja kosa</span><span class="svc-price">1.500 din</span></div>
+    <div class="svc-item"><span class="svc-name">Duga kosa</span><span class="svc-price">1.700 din</span></div>
+    <div class="svc-item"><span class="svc-name">Fade</span><span class="svc-price">1.800 din</span></div>
+    <div class="svc-item"><span class="svc-name">Dečije šišanje</span><span class="svc-price">1.300 din</span></div>
+    <div class="svc-item"><span class="svc-name">Fazoniranje kose</span><span class="svc-price">1.000 din</span></div>
+
+    <div class="svc-cat">Brada</div>
+    <div class="svc-item"><span class="svc-name">Šišanje brade S</span><span class="svc-price">400 din</span></div>
+    <div class="svc-item"><span class="svc-name">Šišanje brade M</span><span class="svc-price">600 din</span></div>
+    <div class="svc-item"><span class="svc-name">Šišanje brade L</span><span class="svc-price">700 din</span></div>
+    <div class="svc-item"><span class="svc-name">Šišanje brade XL</span><span class="svc-price">800 din</span></div>
+    <div class="svc-item"><span class="svc-name">Šišanje brade XXL</span><span class="svc-price">1.000 din</span></div>
+    <div class="svc-item"><span class="svc-name">Brijanje brade</span><span class="svc-price">500 din</span></div>
+    <div class="svc-item"><span class="svc-name">Farbanje brade</span><span class="svc-price">400 din</span></div>
+
+    <div class="svc-cat">Pranje & Masaža</div>
+    <div class="svc-item"><span class="svc-name">Pranje kose</span><span class="svc-price">500 din</span></div>
+    <div class="svc-item"><span class="svc-name">Pranje kose + masaža glave</span><span class="svc-price">800 din</span></div>
+    <div class="svc-item"><span class="svc-name">Relaks masaža</span><span class="svc-price">po dogovoru</span></div>
+
+    <div class="svc-cat">Tretmani & Kozmetika</div>
+    <div class="svc-item"><span class="svc-name">Čupanje obrva</span><span class="svc-price">600 din</span></div>
+    <div class="svc-item"><span class="svc-name">Crna maska</span><span class="svc-price">600 din</span></div>
+    <div class="svc-item"><span class="svc-name">Depilacija</span><span class="svc-price">500 din</span></div>
+    <div class="svc-item"><span class="svc-name">Minival H₂O</span><span class="svc-price">4.000 din</span></div>
+    <div class="svc-item"><span class="svc-name">Minival</span><span class="svc-price">5.000 din</span></div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- INFO -->
+<section class="section reveal">
+  <div class="section-label">Gde nas naći</div>
+  <h2 class="section-title">Radno vreme<br>& <em>kontakt</em></h2>
+
+  <div class="info-card">
+    <div class="info-label">Radno vreme</div>
+    <div class="hours-row"><span class="hours-day">Ponedeljak – Petak</span><span class="hours-time">11:00 – 19:00</span></div>
+    <div class="hours-row"><span class="hours-day">Subota</span><span class="hours-time">09:00 – 14:00</span></div>
+    <div class="hours-row"><span class="hours-day">Nedelja</span><span class="hours-closed">Zatvoreno</span></div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-label">Adresa</div>
+      <div class="info-value">Branislava Nušića 2<br>Subotica</div>
+    </div>
+    <div class="info-card">
+      <div class="info-label">Telefon</div>
+      <div class="info-value"><a href="tel:+381611431702">061 / 143-17-02</a></div>
+    </div>
+    <div class="info-card">
+      <div class="info-label">Website</div>
+      <div class="info-value"><a href="https://teatro.rs" target="_blank">teatro.rs</a></div>
+    </div>
+    <div class="info-card">
+      <div class="info-label">Zakazivanje</div>
+      <div class="info-value"><a href="https://zakazivanje.teatro.rs" target="_blank">Online →</a></div>
+    </div>
+  </div>
+
+  <div class="social-wrap">
+    <a href="https://www.instagram.com/teatro_su/" class="social-btn" target="_blank">
+      <svg class="social-icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      Instagram
+    </a>
+    <a href="https://www.facebook.com/Teatro-hairroom-419413341431228/" class="social-btn" target="_blank">
+      <svg class="social-icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Facebook
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <img class="footer-logo" src="data:image/png;base64,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tZGd3AALi7GcLFaNgM2zGpqTpEVFGykqaV0zaJs0tZWPcTFI14ZvRthb7528G8MDiSqznrMbdvp77/ZPw535c5ul9vd0hbDc7xcK6Jjt5rKipfI1p5ZAcTgrHLLaWo7JXXYQX+8SWmi6txNQymdOd7ubut48fH1Kpp636erJapt51DLa2RkdQ5lA6fruJzkBw3ccPHn6l0bxXxtx/ZntMqNv1HqG30jaSgv10pKdpJbFBVyMYCeZDQcLxdL5e7rCyG6Xi4V0cbt5jKmpfIGnxAcTgrPOsehB73XlW74jePpF4Nl0QP8AneqPxK/6xU76b77e0/ZPbbjf3YG1Xi7WnrPsXdK6g63HWdmqHx7+M4zukZxk/KVVuOoL9cqfs1xvdyrYd4O6uoqnyNyORw4kZWVdaNGD3usqt3xO4fSKm616RAO7qyrPxSfrFPfSZ329p+xtPH/rW1n7BrPVVhiENpv9fSwjlE2UujHsacgfIvrrbpUctT1Z+Kz9YqTqDTYJ3dQ1ZHd/u3H0im3ZeNrRv+yIiY4Xl42ga0u0Bgr9TXKSEjBjZL1bXDwIbgHzWsLLuorCOV8qD+Yf/ax1WynjnLaad08YAw90e4Tw48MlTStaxtWNkWmZ5UURFdAiIgIiICIiAiIgIiICIiAiIg+tc5rg5ri1wOQQcEFXU9zuVRudfcKuXq3B7N+Zzt1w5EZPA+tWiKNokXDK6tZVuq2VdQ2ocSXSiQh5zzy7mvcVyuMVMKaK4VccABAjbM4NAPPhnHeflVoibQbiIikEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQf/9k=" alt="Teatro">
+  <div class="footer-note">Man Hairroom · Branislava Nušića 2, Subotica<br>© 2012 – 2026 Teatro</div>
+  <div class="footer-powered">
+    Powered by <a href="https://psihotrot-tech.github.io/adversa_nfc/index.html" target="_blank">Adversa</a>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)} });
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
