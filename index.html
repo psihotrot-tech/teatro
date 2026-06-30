@@ -258,6 +258,47 @@ body{
 .social-btn:hover{border-color:var(--gold);color:var(--gold)}
 .social-icon{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 
+/* WIFI CARD */
+.wifi-card{
+  background:var(--black2);
+  border:1px solid rgba(201,168,76,.15);
+  border-radius:16px;
+  padding:24px 22px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.wifi-icon-wrap{
+  width:48px;height:48px;
+  border-radius:12px;
+  background:rgba(201,168,76,.1);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.wifi-icon-wrap svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.wifi-info{flex:1;min-width:0}
+.wifi-ssid{font-size:15px;font-weight:600;color:var(--white);margin-bottom:2px;letter-spacing:.02em}
+.wifi-pass-row{display:flex;align-items:center;gap:8px}
+.wifi-pass{font-size:13px;color:var(--muted);font-family:'Inter',monospace;letter-spacing:.02em}
+.wifi-copy-btn{
+  background:transparent;border:1px solid rgba(201,168,76,.25);
+  color:var(--gold);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  padding:5px 10px;border-radius:100px;cursor:pointer;
+  transition:all .2s;flex-shrink:0;
+}
+.wifi-copy-btn:hover{border-color:var(--gold);background:rgba(201,168,76,.08)}
+.wifi-copy-btn.copied{color:var(--gold2);border-color:var(--gold2)}
+.wifi-connect-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:14px;
+  padding:13px;border-radius:100px;
+  background:rgba(201,168,76,.08);
+  border:1px solid rgba(201,168,76,.2);
+  color:var(--gold);font-size:12px;font-weight:500;letter-spacing:.05em;
+  text-decoration:none;transition:all .2s;
+}
+.wifi-connect-btn:hover{background:rgba(201,168,76,.15);border-color:var(--gold)}
+
 /* FOOTER */
 .footer{text-align:center;padding:40px 24px 52px;border-top:1px solid rgba(201,168,76,.1)}
 .footer-logo{display:block;width:80px;height:80px;object-fit:cover;border-radius:12px;margin:0 auto 12px;opacity:.55;}
@@ -393,6 +434,31 @@ body{
   </div>
 </section>
 
+<div class="gold-divider"></div>
+
+<!-- WIFI -->
+<section class="section reveal">
+  <div class="section-label">Dok čekaš</div>
+  <h2 class="section-title">Besplatan<br><em>Wi-Fi</em></h2>
+
+  <div class="wifi-card">
+    <div class="wifi-icon-wrap">
+      <svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+    </div>
+    <div class="wifi-info">
+      <div class="wifi-ssid">TEATRO</div>
+      <div class="wifi-pass-row">
+        <span class="wifi-pass" id="wifiPassText">teatro2012</span>
+        <button class="wifi-copy-btn" onclick="copyWifiPass(this)">Kopiraj</button>
+      </div>
+    </div>
+  </div>
+  <a href="WIFI:T:WPA;S:TEATRO;P:teatro2012;;" class="wifi-connect-btn">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+    Poveži se automatski
+  </a>
+</section>
+
 <!-- FOOTER -->
 <footer class="footer">
   <img class="footer-logo" src="data:image/png;base64,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tZGd3AALi7GcLFaNgM2zGpqTpEVFGykqaV0zaJs0tZWPcTFI14ZvRthb7528G8MDiSqznrMbdvp77/ZPw535c5ul9vd0hbDc7xcK6Jjt5rKipfI1p5ZAcTgrHLLaWo7JXXYQX+8SWmi6txNQymdOd7ubut48fH1Kpp636erJapt51DLa2RkdQ5lA6fruJzkBw3ccPHn6l0bxXxtx/ZntMqNv1HqG30jaSgv10pKdpJbFBVyMYCeZDQcLxdL5e7rCyG6Xi4V0cbt5jKmpfIGnxAcTgrPOsehB73XlW74jePpF4Nl0QP8AneqPxK/6xU76b77e0/ZPbbjf3YG1Xi7WnrPsXdK6g63HWdmqHx7+M4zukZxk/KVVuOoL9cqfs1xvdyrYd4O6uoqnyNyORw4kZWVdaNGD3usqt3xO4fSKm616RAO7qyrPxSfrFPfSZ329p+xtPH/rW1n7BrPVVhiENpv9fSwjlE2UujHsacgfIvrrbpUctT1Z+Kz9YqTqDTYJ3dQ1ZHd/u3H0im3ZeNrRv+yIiY4Xl42ga0u0Bgr9TXKSEjBjZL1bXDwIbgHzWsLLuorCOV8qD+Yf/ax1WynjnLaad08YAw90e4Tw48MlTStaxtWNkWmZ5UURFdAiIgIiICIiAiIgIiICIiAiIg+tc5rg5ri1wOQQcEFXU9zuVRudfcKuXq3B7N+Zzt1w5EZPA+tWiKNokXDK6tZVuq2VdQ2ocSXSiQh5zzy7mvcVyuMVMKaK4VccABAjbM4NAPPhnHeflVoibQbiIikEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQf/9k=" alt="Teatro">
@@ -407,6 +473,16 @@ const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)} });
 },{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+function copyWifiPass(btn){
+  const pass = document.getElementById('wifiPassText').textContent;
+  navigator.clipboard.writeText(pass).then(() => {
+    const original = btn.textContent;
+    btn.textContent = 'Kopirano!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+  });
+}
 </script>
 </body>
 </html>
